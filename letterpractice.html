@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+
+<title>More Psychic</title>
+	<style type="text/css">
+	</style>
+
+</head>
+
+<body>
+		<div id="game">
+		<h1>Guess the Letter Game</h1>
+			<p><h2>How To Play:</h2></p>
+			<p><strong>Guess the letter the computer has picked. Press a letter key to see if you can win. You have nine chances!</strong>
+			</p>
+			<p><strong>Good Luck!</strong></p> 
+			<br>
+    		<p>Wins: <span id="wins">0</span></p>
+    		<p>Losses: <span id="losses">0</span></p>
+    		<p>Guesses Left: <span id="player-guesses-left">9</span></p>
+    		<p>Your Guesses so far: <span id="player-guesses"></span></p>
+
+		</div>
+	
+
+	<script type="text/javascript">
+
+		//Set computer choices
+		var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j" "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+		//declares the talies to 0
+
+		var wins = 0;
+		var losses = 0;
+	
+
+		// When the user presses the key it records the keypress and then sets it to userguess
+		document.onkeyup = function(event) {
+			var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+		// This sets the computer guess equal to the random.
+		var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+
+		var guessedLetters = ["_", "_", "_", "_", "_", "_", "_", "_", "_"]
+
+		
+		function guessedLetters(letter); {
+		var goodGuess = false;
+		var moreToGuess = false;
+
+		for (var i = 0; i <computerChoices.length; i++) {
+				if (computerChoices[i] == letter) {
+				guessedLetters[i] = letter;
+				goodGuess = true;
+				}
+			}	
+			
+			if (guessedLetters[i] == '_') {
+				moreToGuess = true;
+			}
+
+			if (moreToGuess) {
+				console.log ('Try again!');
+				console.log ()guessedLetters.join("");
+			if (goodGuess) {
+				console.log ("Yay! You win!")
+				}
+			}
+			// Taking the tallies and displaying them in HTML
+			var html = "<p>Press any letter to start playing</p>" +
+				"<p>wins: " + 
+					wins + 
+						"</p>" +
+				"<p>losses: " + 
+					losses + 
+						"</p>" +;
+
+			// Placing the html into the game ID
+		document.querySelector('#game').innerHTML = html;
+		
+
+
+ 
+
+			</script>
+
+		</div>
+	</body>
+
+</html>
+   
+
