@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+
+<title>More Psychic</title>
+	<style type="text/css">
+	</style>
+
+</head>
+
+<body>
+		<div id="game">
+
+		//Game introduction
+
+		<h1>Guess the Letter Game</h1>
+			<p><h2>How To Play:</h2></p>
+			<p><strong>Guess the letter the computer has picked. Press a letter key to see if you can win. You have nine chances!</strong>
+			</p>
+			<p><strong>Good Luck!</strong></p> 
+			</div>
+
+	<script type="text/javascript"></script>
+
+		//Variables need for play
+
+		var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+
+		var lettersGuessed = []
+		var numWins = 0;
+		var numLosses = 0;
+		var numGuesses = 9;
+		var guessesTaken;
+		var letterToGuess;
+
+
+		//Functions needed to accomplish play
+
+		function initGame() {
+  		var letterIndex = Math.floor(Math.random() * alphabet.length);
+  			letterToGuess = alphabet[letterIndex];
+  				guessesTaken = 0;
+  		lettersGuessed = [];
+  			document.getElementById("player-guesses").innerHTML = "";
+  				document.getElementById("player-guesses-left").innerHTML = "9";
+	}
+
+		function eventKeyPressed(e) {
+  			var letterPressed = String.fromCharCode(e.keyCode);
+  			letterPressed = letterPressed.toLowerCase();
+
+  		guessIndex = alphabet.indexOf(letterPressed);
+  			if (guessIndex < 0) {
+    		console.log("That is not a letter");
+   			 return;
+  	}
+
+  		handleGuessedLetter(letterPressed);
+	}
+
+		function handleGuessedLetter(letter) {
+  			if (letter === letterToGuess) {
+    			handleWin();
+ 			 } else {
+   				 handleMiss(letter);
+ 		}
+	}
+
+		function handleWin() {
+  			numWins++;
+  				document.getElementById("wins").innerHTML = numWins;
+  			initGame();
+	}
+
+		function handleMiss(letter) {
+  			guessesTaken++;
+  			if (guessesTaken === numGuesses) {
+    			numLosses++
+    			document.getElementById("losses").innerHTML = numLosses;
+    	initGame();
+  	} else {
+    	lettersGuessed.push(letter);
+    		document.getElementById("player-guesses").innerHTML = lettersGuessed.join(", ");
+    	document.getElementById("player-guesses-left").innerHTML = numGuesses - guessesTaken;
+  		}
+	}
+
+		window.addEventListener("keyup", eventKeyPressed, true);
+			initGame();
+
+
+			</script>
+	</body>
+
+</html>
